@@ -1,0 +1,75 @@
+/*Comienzo Header*/
+.cuerpo__cabeza {
+  z-index: 10;
+  background: rgb(141, 0, 0);
+  border-radius: 0 0 0 1rem;
+  padding: 0 1rem;
+  width: 100vw;
+  position: fixed;
+}
+
+.cuerpo__cabeza__menu ul li:hover {
+  background-color: rgba(25, 25, 112, 0.5);
+  border-radius: 1rem;
+}
+a:hover {
+  color: white;
+}
+
+menu ul li {
+  text-align: end;
+}
+menu ul li a {
+  color: rgb(240, 240, 240);
+  margin: 4px;
+}
+/*Fin header*/
+/* Comienzo main */
+main h1 {
+    text-align: center;
+    padding-top: 4rem;
+  }
+  .tarjeta {
+    display: flex;
+    justify-content: center;
+  }
+  .watsap {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    z-index: 1;
+    width: 4rem;
+  }
+  
+  /* Fin main */
+/*Comienzo Footer */
+
+.cuerpo__pie {
+  background-color: #222021;
+  font-family: inherit;
+  display: flex;
+  justify-content: space-between;
+}
+.cuerpo__pie__texto {
+  margin: 30px;
+  display: inline-block;
+  color: white;
+}
+.cuerpo__pie__redes {
+  display: flex;
+  justify-content: end;
+  align-content: center;
+  align-items: center;
+}
+.cuerpo__pie__redes ul {
+  margin: 0%;
+  padding: 0%;
+}
+.cuerpo__pie__redes ul li {
+  display: inline-block;
+  list-style: none;
+  position: relative;
+  margin: 10px;
+}
+
+/*Final Footer gral*/
