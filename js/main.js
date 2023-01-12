@@ -1,173 +1,188 @@
-let bienvenida = prompt("Quien nos Visita");
-alert("Bienvenido/a, " + bienvenida);
+//Productos
 
-let usd = parseInt(
-  prompt(
-    "Cuanto estas dispuesto a gastar por una camiseta de Suarez? (cuestan entre 75 USD y 200 USD)"
-  )
-);
+//aray vacio para carrito
+let articulosCarrito = [];
 
-if (usd < 75) {
-  alert("No te alcanza :(");
-} else if (usd < 99) {
-  alert("La de Ajax");
-} else if (usd < 124) {
-  alert("La de A. Madrid");
-} else if (usd < 149) {
-  alert("La de Liverpool");
-} else if (usd < 174) {
-  alert("La de Barcelona");
-} else if (usd < 199) {
-  alert("La de Uruguay");
-} else if (usd <= 200) alert("La de Nacional");
-else {
-  alert("Comprate mas de 1");
+//Tarjetas de camisetas
+const cards = document.querySelectorAll(".card");
+
+//Funcion para ver productos en carrito
+cards.forEach((card) => {
+  card.addEventListener("click", (e) => {
+    verDatosProductos(e.target.parentElement);
+  });
+});
+function verDatosProductos(producto) {
+  const infoProductos = {
+    titulo: producto.querySelector(".card-title").textContent,
+    id: producto.querySelector(".btn").getAttribute("data-id"),
+  };
+  articulosCarrito = [...articulosCarrito, infoProductos];
+  console.log(articulosCarrito);
+  carritoHTML();
+
+  confirmarCompra();
+}
+const carrito = document.querySelector("#carrito");
+
+//funcion para llenar carrito
+function carritoHTML() {
+  limpiarHTML();
+  articulosCarrito.forEach((producto) => {
+    const row = document.createElement("p");
+    row.innerHTML = `<div class="container">
+    <p>${producto.titulo}</p>
+    <button class= "btn btn-danger" id="${producto.id}">Eliminar</button>
+    </div>
+    `;
+    carrito.appendChild(row);
+  });
 }
 
-alert("Si estas dispuesto a comprar la camiseta registrate: " + bienvenida);
-let registroUsuario = prompt("Nombre de usuario");
-let registroContrasenia = prompt("Contraseña ");
+function limpiarHTML() {
+  carrito.innerHTML = "";
+}
 
-alert("Ahora ingresa al sistema");
-for (let i = 0; i < 3; i++) {
-  let usuario = prompt("Nombre de usuario");
-  let contrasenia = prompt("Contraseña ");
-  if (usuario == registroUsuario && contrasenia == registroContrasenia) {
-    alert("Bienvenido al sistema " + usuario);
-    break;
-  } else {
-    alert(
-      "Usuario " + usuario + " o contraseña " + contrasenia + " incorrectas"
+carrito.addEventListener("click", eliminarCompra);
+
+//Funcion para eliminar articulos del carrito
+function eliminarCompra(e) {
+  if (e.target.classList.contains("btn-danger")) {
+    let productoID = e.target.getAttribute("id");
+    articulosCarrito = articulosCarrito.filter(
+      (producto) => producto.id !== productoID
     );
+    carritoHTML();
   }
 }
 
-let camiseta = prompt(
-  "La camiseta de que equipo quieres: 1-Nacional, 2-Uruguay, 3-Barcelona, 4-Liverpool, 5-A.Madrid, 6-Ajax "
-);
-switch (camiseta) {
-  case "1":
-    alert("La camiseta de Nacional cuesta USD 200");
-    break;
-  case "2":
-    alert("La camiseta de Uruguay cuesta USD 175");
-    break;
-  case "3":
-    alert("La camiseta de Barcelona cuesta USD 150");
-    break;
-  case "4":
-    alert("La camiseta de Liverpol cuesta USD 125");
-    break;
-  case "5":
-    alert("La camiseta de A. Madrid cuesta USD 100");
-    break;
-  case "6":
-    alert("La camiseta de Ajax cuesta USD 75");
-    break;
-  default:
-    alert("No coincide numero con camisetas disponibles");
-    break;
+//Funcion para confirmar compras de carrito enviando una copia a una nueva array 
+function confirmarCompra() {
+  const conf = document.createElement("p");
+  conf.innerHTML = `<button class= "btn btn-light compra" >Confirmar</button>`;
+  carrito.appendChild(conf);
 }
-function calcularIva(precio) {
-  let totalSinIva = precio * 0.79;
-  alert("El precio sin iva es de: $ " + totalSinIva);
-}
-alert("Te hacemos descuento del IVA por primera compra");
-let compra = prompt(
-  "Entonces vas a comprar la de: 1-Nacional, 2-Uruguay, 3-Barcelona, 4-Liverpool, 5-A.Madrid, 6-Ajax"
-);
-switch (compra) {
-  case "1":
-    calcularIva(200);
-    break;
-  case "2":
-    calcularIva(175);
-    break;
-  case "3":
-    calcularIva(150);
-    break;
-  case "4":
-    calcularIva(125);
-    break;
-  case "5":
-    calcularIva(100);
-    break;
-  case "6":
-    calcularIva(75);
-    break;
-  default:
-    alert("No coincide numero con camisetas disponibles");
-    break;
-}
-
-//Para esta 2da pre entrega agregue Array con Objetos, y funcion de Orden superior. F uncion para ordenar los array y una funcion para busqueda dentro del array
-class Camiseta {
-  constructor(equipo, precio, anio, id) {
-    this.equipo = equipo;
-    this.precio = parseFloat(precio);
-    this.anio = parseInt(anio);
-    this.id = id;
+let compraConfirmada = [];
+carrito.addEventListener("click", confirCompra);
+function confirCompra(e) {
+  if (e.target.classList.contains("btn-light")) {
+    compraConfirmada = articulosCarrito.slice();
   }
 }
 
-const camisetas = [
-  new Camiseta("NACIONAL", 200, 2022, 1),
-  new Camiseta("URUGUAY", 175, 2022, 2),
-  new Camiseta("BARCELONA", 150, 2020, 3),
-  new Camiseta("LIBERPOOL", 125, 2014, 4),
-  new Camiseta("A MADRID", 100, 2021, 5),
-  new Camiseta("AJAX", 75, 2011, 6),
+
+//Base de datos para para logear usuarios 
+
+const usuarios = [
+  {
+    mail: "juan@mail.com",
+    pass: "1234",
+  },
+  {
+    mail: "pedro@mail.com",
+    pass: "1234",
+  },
+  {
+    mail: "maria@mail.com",
+    pass: "1234",
+  },
 ];
 
-let criterio = prompt(
-  "Filtra el orden para ver el preducto:\n1 - Equipo (A a Z) \n2 - De menor a mayor precio\n3 - De mayor a menor precio \n4 - Fecha de Camiseta (Más vieja a más nueva)"
-);
+//Ingresar usuario pre cargados
+const mailLogin = document.getElementById("emailLogin"),
+  passLogin = document.getElementById("passwordLogin"),
+  recordar = document.getElementById("recordarme"),
+  btnLogin = document.getElementById("login"),
+  modalEl = document.getElementById("modalLogin"),
+  modal = new bootstrap.Modal(modalEl);
 
-function ordenar(criterio, array) {
-  let arrayOrdenado = array.slice(0);
+//Guardamos los datos que recuperamos de la database en el storage
+function guardarDatos(usuarioDB, storage) {
+  const usuario = {
+    user: usuarioDB.mail,
+    pass: usuarioDB.pass,
+  };
 
-  switch (criterio) {
-    case "1":
-      return arrayOrdenado.sort((a, b) => a.equipo.localeCompare(b.equipo));
-    case "2":
-      return arrayOrdenado.sort((a, b) => a.precio - b.precio);
-    case "3":
-      return arrayOrdenado.sort((a, b) => b.precio - a.precio);
-    case "4":
-      return arrayOrdenado.sort((a, b) => a.anio - b.anio);
-    default:
-      alert("No es un criterio válido");
-      break;
+  storage.setItem("usuario", JSON.stringify(usuario));
+}
+
+//quitar los storages
+function borrarDatos() {
+  localStorage.clear();
+  sessionStorage.clear();
+}
+
+//Traer los datos que se guardaron y los retorno
+function traerUsuario(storage) {
+  let usuarioEnStorage = JSON.parse(storage.getItem("usuario"));
+  return usuarioEnStorage;
+}
+
+
+
+function validarUsuario(usersDB, user, pass) {
+  let encontrado = usersDB.find((userDB) => userDB.mail == user);
+
+  if (typeof encontrado === "undefined") {
+    return false;
+  } else {
+    if (encontrado.pass != pass) {
+      return false;
+    } else {
+      return encontrado;
+    }
   }
 }
 
-function crearStringResultado(array) {
-  let info = "";
+btnLogin.addEventListener("click", (e) => {
+  e.preventDefault();
 
-  array.forEach((elemento) => {
-    info +=
-      "Equipo: " +
-      elemento.equipo +
-      "\nPrecio: " +
-      elemento.precio +
-      " USD\nAño de camiseta: " +
-      elemento.anio +
-      "\n\n";
-  });
+  //Validamos que ambos campos estén completos
 
-  return info;
-}
+    
+    let data = validarUsuario(usuarios, mailLogin.value, passLogin.value);
 
-alert(crearStringResultado(ordenar(criterio, camisetas)));
+    if (!data) {
+      alert(`Usuario y/o contraseña erróneos`);
+    } else {
+      if (recordar.checked) {
+        guardarDatos(data, localStorage);
+      } else {
+        guardarDatos(data, sessionStorage);
+      }
+      modal.hide();
+    }
+  
+});
 
-busqueda = prompt("Buscar camiseta por nombre")
-function buscador (busqueda, array) {
+//Comienzo formulario de contacto
+//variables
+let nombreForm = document.querySelector("#nombre");
+let apellidoForm = document.querySelector("#apellido");
+let correoForm = document.querySelector("#correo");
+let mensajeForm = document.querySelector("#mensaje");
+let formulario = document.querySelector("#formulario")
+let info = document.querySelector(".info")
 
+//Eventos
+.addEventListener("input", function () {
+  console.log(nombreForm.value);
+})
+apellidoForm.addEventListener("input", function () {
+  
+})
+correoForm.addEventListener("input", function () {
+  
+})
+mensajeForm.addEventListener("input", function () {
+  
+})
 
-const resultado = array.find((el) => el.equipo == busqueda.toUpperCase())
-return resultado
-}
-
-
-
-console.log(buscador(busqueda, camisetas));
+const mostrarInfo = formulario.addEventListener ("submit", function (e){
+  e.preventDefault();
+  info.innerHTML=`
+  <div class="alert alert-secondary" role="alert">
+  <p>Gracias ${nombreForm.value} por tu mensaje.</p>
+</div>
+  `
+})

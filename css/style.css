@@ -25,6 +25,12 @@ menu ul li a {
 }
 /*Fin header*/
 /* Comienzo main */
+main{
+  padding-top: 18rem;
+}
+.login {
+  text-align: end;
+}
 main h1 {
     text-align: center;
     padding-top: 4rem;
