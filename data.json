@@ -1,0 +1,53 @@
+[
+    {
+        "id":"01",
+        "equipo":"Nacional",
+        "precio":200,
+        "anio":2022,
+        "img1":"./img/camisetas/naca.jpg",
+        "img2":"./img/camisetas/nacb.jpg"
+    },
+    {
+        "id":"02",
+        "equipo":"Uruguay",
+        "precio":175,
+        "anio":2022,
+        "img1":"./img/camisetas/urua.jpg",
+        "img2":"./img/camisetas/urub.jpg"
+    },
+    {
+        "id":"03",
+        "equipo":"Barcelona",
+        "precio":150,
+        "anio":2020,
+        "img1":"./img/camisetas/bara.jpg",
+        "img2":"./img/camisetas/barb.jpg"
+    },
+    {
+        "id":"04",
+        "equipo":"Liverpool",
+        "precio":150,
+        "anio":2014,
+        "img1":"./img/camisetas/liva.jpg",
+        "img2":"./img/camisetas/livb.jpg"
+    },
+    {
+        "id":"05",
+        "equipo":"A.Madrid",
+        "precio":145,
+        "anio":2021,
+        "img1":"./img/camisetas/atma.jpg",
+        "img2":"./img/camisetas/atmb.jpg"
+    },
+    {
+        "id":"06",
+        "equipo":"Ajax",
+        "precio":125,
+        "anio":2011,
+        "img1":"./img/camisetas/ajaa.jpg",
+        "img2":"./img/camisetas/ajab.jpg"
+    }
+
+]
+
+
